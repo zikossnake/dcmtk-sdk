@@ -1,0 +1,5 @@
+module DCMTK {
+    umbrella "dcmtk"
+    export *
+    requires cplusplus
+}

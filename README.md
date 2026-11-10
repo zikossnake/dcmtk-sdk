@@ -12,7 +12,7 @@ were gitignored, so a fresh clone could not build.
 | --- | --- |
 | `DCMTK.xcframework/ios-arm64/libDCMTK-iphoneos.a` | Device (arm64) |
 | `DCMTK.xcframework/ios-arm64_x86_64-simulator/libDCMTK-iphonesimulator.a` | Simulator (arm64 + x86_64) |
-| `DCMTK.xcframework/*/Headers` | `dcmtk/` and `openssl/` public headers, plus a `module.modulemap` |
+| `DCMTK.xcframework/*/Headers` | `dcmtk/` and `openssl/` public headers; the `module.modulemap` is in `dcmtk/` so it never collides with another library's at the root of `include/` |
 | `scripts/build-openssl-ios.sh` | Builds OpenSSL for iOS from the official release tarball |
 | `scripts/make_dcmtk_xcframework.sh` | Builds DCMTK from the official `DCMTK-3.6.9` tag and creates the XCFramework |
 
@@ -25,7 +25,7 @@ it from.
 
 ```swift
 // Tuist/Package.swift
-.package(url: "git@github.com:zikossnake/dcmtk-sdk.git", exact: "1.0.0"),
+.package(url: "git@github.com:zikossnake/dcmtk-sdk.git", exact: "1.0.1"),
 ```
 
 ```swift

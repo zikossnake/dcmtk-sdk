@@ -89,9 +89,12 @@ cp "$WORK/build-iphoneos/config/include/dcmtk/config/osconfig.h" "$HEADERS/dcmtk
 # X509 fields through the OpenSSL API rather than parsing DER by hand.
 cp -R "$OPENSSL_IOS_DIR/out-device-arm64/include/openssl" "$HEADERS/openssl"
 
-cat > "$HEADERS/module.modulemap" <<EOF
+# The module map sits in the dcmtk/ folder, not at the root of Headers/: Xcode copies the
+# headers of every static XCFramework into one include/ directory, so a root module.modulemap
+# collides with any other library that ships one there (deepecho_imagingFFI in the app).
+cat > "$HEADERS/dcmtk/module.modulemap" <<EOF
 module $NAME {
-    umbrella "dcmtk"
+    umbrella "."
     export *
     requires cplusplus
 }
